@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Vic Manuel Ortiz</title>
+    <title>RUN HUNDRED: A Coding Project By Vic Manuel Ortiz</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,13 +15,16 @@
 
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/prism.css">
+    <link rel="icon" href="img/favicon.ico">
+
 </head>
 
 <body class="d-flex flex-column h-100">
     <!-- nav section -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">APP NAME</a>
+            <a class="navbar-brand" href="#"><img src="img/Vic manuel.png" width="36" height="36"
+                    class="d-inline-block align-text-top"> RUN HUNDRED</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,11 +41,11 @@
                         <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/vicmo616/RunHundred">Git Repo</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" target="_blank" href="#">About</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -50,43 +53,133 @@
     <!-- main section -->
     <main class="flex-shrink-0">
         <div class="container px-5 py-5 mt-5">
-            <h2 class="border-1 border-bottom bottom-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom bottom-dark">The Code for RUN HUNDRED</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //call hello world
-                            function HelloWorld() {
-                                alert("hello world");
-                            } 
+                           
+//get values from the page
+//starts or controller function
+function getValues(){
+    //get values from the page
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+
+    //validate our input
+    //parse into integers
+    startValue = parseInt(startValue);
+    endValue = parseInt(endValue);
+
+    if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+        // we call generateNumbers
+    let numbers = generateNumbers(startValue, endValue);
+          // we call displayNumbers
+    displayNumbers(numbers);
+
+    }else{
+        alert("You must enter integers");
+    }
+
+    
+  
+}
+
+//generate numbers from startValue to the endValue
+//logic function(s)
+function generateNumbers(sValue, eValue){
+    let numbers = [];
+    // we want to get all numbers from start to end
+    for(let index = sValue; index <= eValue; index++){
+        //this will execute in a loop until index = eValue
+        numbers.push(index);
+    }
+
+    return numbers;
+}
+
+//display the numbers and mark the even numbers in bold
+//display or view functions
+function displayNumbers(numbers){
+
+    let templateRows = "";
+
+    for (let index = 0; index < numbers.length; index++) {
+        
+        let className = "even";
+
+        let number = numbers[index];
+
+        if(number % 2 == 0){
+            className = "even";
+        }
+        else{
+            className = "odd";
+        }
+        templateRows += `&lt;tr>&lt;td class="${className}" >${number}&lt;/td>&lt;/tr>
+    }
+
+    document.getElementById("results").innerHTML = templateRows;
+} 
                         </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello world</h5>
-                    <p>Hello world is a function that displays an alert with a message of hello world.</p>
+                    <div class="row">
+                        <!-- <div class="col-12"><img src="img/runhundred.png" width="250" height="250" alt="RUN HUNDRED LOGO"></div> -->
+                        <div class="col">
+                            <p> The Code Is Structured In Three Functions.</p>
+                            <h5>getValues</h5>
+                            <p>getValues accepts(gets) the user input from the page.
+                                It utilizes <strong>getElementById</strong> to pull the values from the page. It passes
+                                those values to the generateNumbers
+                                function. The function <strong>generateNumbers</strong> returns an array of values and
+                                passes that array to the <strong>displayNumbers</strong> function.
+                            </p>
+                            <h5>generateNumbers</h5>
+                            <p>generateNumbers takes in two parameters startValue and endValue. We create a variable
+                                (numbers) that
+                                holds an array. A for loop is used to generate all of the numbers between
+                                <strong>startValue</strong> and <strong>endValue.</strong>
+                            </p>
+                            <h5>displayNumbers</h5>
+                            <p>displayNumbers takes in one parameter numbers. The variable numbers is an array that
+                                holds values between
+                                <strong>startValue</strong> and <strong>endValue</strong>. We create a variable
+                                (className) that holds the name of a CSS class that
+                                we will use to bold the numbers. We create a variable templateRows that will hold the
+                                HTML we will write to the page.
+
+                                <p>A for loop is used to check all of the numbers to see if
+                                    they are even or odd. The remainder operator (%) is used to see if the number is divisable by two. If it
+                                    returns zero then it is even. If not (else) it is odd. The correct className is injected into the HTML row for
+                                    display. Each iteration of the loop adds to the
+                                    templateRows variable. At the end of the loop the
+                                    resulting HTML rows are written to the page.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </main>
     <!-- footer section -->
-    <footer class="footer mt-auto py-3">
+    <footer class="footer mt-auto py-3 bg-black">
         <div class="container-fluid ">
             <div class="row row-cols-1 row-cols-lg-3 gy-2">
                 <div class="col  order-last order-lg-first text-light">
                     <div><span class="text-muted">&copy;2021</span> Vic Manuel Ortiz | vicmo616@gmail.com</div>
                 </div>
-                <div class="col align-items-center justify-content-start justify-content-lg-center">
-                    <!-- <img src="" alt="Vic Manuel Ortiz Logo" height="24"> -->
+                <div class="col align-items-center d-flex justify-content-center justify-content-lg-center ml-5">
+                    <img src="img/favicon.ico" alt="Vic Manuel Ortiz Logo">
                 </div>
                 <div class="col d-flex align-items-center justify-content-start justify-content-lg-end">
                     <div class="row">
-                        <div class="col social"><a target="_blank" href="#"><i class="fab fa-twitter fa-2x"></i></a>
+                        <div class="col social"><a target="_blank" href="#"><i class="fab fa-github fa-2x"></i></a>
                         </div>
                         <div class="col social"><a target="_blank" href="#"><i class="fab fa-linkedin fa-2x"></i></a>
-                        </div>
-                        <div class="col social"><a target="_blank" href="#"><i class="fab fa-github fa-2x"></i></a>
                         </div>
                     </div>
                 </div>
